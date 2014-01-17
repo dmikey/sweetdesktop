@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/web">
+        <file alias="index.html">web/index.html</file>
+    </qresource>
+    <qresource prefix="/web/js">
+        <file alias="app.js">web/js/app.js</file>
+        <file alias="bootstrap-switch.min.js">web/js/bootstrap-switch.min.js</file>
+        <file alias="bootstrap.min.js">web/js/bootstrap.min.js</file>
+        <file alias="enyo.js">web/js/enyo.js</file>
+        <file alias="enyostuff.js">web/js/enyostuff.js</file>
+        <file alias="init.js">web/js/init.js</file>
+        <file alias="jquery.min.js">web/js/jquery.min.js</file>
+        <file alias="main.js">web/js/main.js</file>
+        <file>web/js/modernizr-2.6.2-respond-1.1.0.min.js</file>
+        <file alias="offline.min.js">web/js/offline.min.js</file>
+        <file alias="store.min.js">web/js/store.min.js</file>
+        <file alias="sweetAPI.js">web/js/sweetAPI.js</file>
+        <file alias="sweetApps.js">web/js/sweetApps.js</file>
+        <file alias="sweetGUI.js">web/js/sweetGUI.js</file>
+    </qresource>
+    <qresource prefix="/web/css">
+        <file alias="animate.min.css">web/css/animate.min.css</file>
+        <file alias="bootstrap-responsive.min.css">web/css/bootstrap-responsive.min.css</file>
+        <file alias="bootstrap-switch.css">web/css/bootstrap-switch.css</file>
+        <file alias="bootstrap.min.css">web/css/bootstrap.min.css</file>
+        <file alias="enyo.css">web/css/enyo.css</file>
+        <file alias="font-awesome.css">web/css/font-awesome.css</file>
+        <file alias="font-awesome.min.css">web/css/font-awesome.min.css</file>
+        <file alias="main.css">web/css/main.css</file>
+    </qresource>
+    <qresource prefix="/web/fonts">
+        <file alias="fontawesome-webfont.eot">web/fonts/fontawesome-webfont.eot</file>
+        <file alias="fontawesome-webfont.svg">web/fonts/fontawesome-webfont.svg</file>
+        <file alias="fontawesome-webfont.ttf">web/fonts/fontawesome-webfont.ttf</file>
+        <file alias="fontawesome-webfont.woff">web/fonts/fontawesome-webfont.woff</file>
+        <file alias="FontAwesome.otf">web/fonts/FontAwesome.otf</file>
+    </qresource>
+    <qresource prefix="/web/img">
+        <file alias="bg01.png">web/img/bg01.png</file>
+        <file alias="derek.jpeg">web/img/derek.jpeg</file>
+        <file alias="glyphicons-halfings-white.png">web/img/glyphicons-halflings-white.png</file>
+        <file alias="glyphicons-halfings.png">web/img/glyphicons-halflings.png</file>
+    </qresource>
+</RCC>
