@@ -15,8 +15,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void handleWebviewLoad();
+
 private:
     Ui::MainWindow *ui;
+    void setTitle();
 };
 
 #endif // MAINWINDOW_H
