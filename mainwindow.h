@@ -16,11 +16,10 @@ public:
     ~MainWindow();
 
 public slots:
-    void handleWebviewLoad();
+
 
 private:
     Ui::MainWindow *ui;
-    void setTitle();
 };
 
 #endif // MAINWINDOW_H

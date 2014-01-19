@@ -46,12 +46,16 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		mainwindow.cpp qrc_serp.cpp \
-		moc_mainwindow.cpp
+		mainwindow.cpp \
+		webinterfacer.cpp qrc_serp.cpp \
+		moc_mainwindow.cpp \
+		moc_webinterfacer.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		webinterfacer.o \
 		qrc_serp.o \
-		moc_mainwindow.o
+		moc_mainwindow.o \
+		moc_webinterfacer.o
 DIST          = ../../Qt/5.2.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.2.0/gcc_64/mkspecs/common/shell-unix.conf \
 		../../Qt/5.2.0/gcc_64/mkspecs/common/unix.conf \
@@ -431,7 +435,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/serpDesktop1.0.0 || mkdir -p .tmp/serpDesktop1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents serp.qrc .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents mainwindow.h .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/serpDesktop1.0.0/ && (cd `dirname .tmp/serpDesktop1.0.0` && $(TAR) serpDesktop1.0.0.tar serpDesktop1.0.0 && $(COMPRESS) serpDesktop1.0.0.tar) && $(MOVE) `dirname .tmp/serpDesktop1.0.0`/serpDesktop1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/serpDesktop1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents serp.qrc .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents mainwindow.h webinterfacer.h .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp webinterfacer.cpp .tmp/serpDesktop1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/serpDesktop1.0.0/ && (cd `dirname .tmp/serpDesktop1.0.0` && $(TAR) serpDesktop1.0.0.tar serpDesktop1.0.0 && $(COMPRESS) serpDesktop1.0.0.tar) && $(MOVE) `dirname .tmp/serpDesktop1.0.0`/serpDesktop1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/serpDesktop1.0.0
 
 
 clean:compiler_clean 
@@ -457,42 +461,42 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_serp.cpp
 qrc_serp.cpp: serp.qrc \
 		web/index.html \
-		web/img/glyphicons-halflings-white.png \
-		web/img/derek.jpeg \
-		web/img/bg01.png \
-		web/img/glyphicons-halflings.png \
 		web/fonts/fontawesome-webfont.ttf \
 		web/fonts/fontawesome-webfont.svg \
-		web/fonts/FontAwesome.otf \
 		web/fonts/fontawesome-webfont.woff \
 		web/fonts/fontawesome-webfont.eot \
-		web/css/bootstrap-switch.css \
-		web/css/main.css \
-		web/css/enyo.css \
-		web/css/animate.min.css \
-		web/css/bootstrap.min.css \
-		web/css/font-awesome.css \
-		web/css/bootstrap-responsive.min.css \
-		web/css/font-awesome.min.css \
+		web/fonts/FontAwesome.otf \
 		web/js/sweetAPI.js \
-		web/js/main.js \
+		web/js/jquery.min.js \
 		web/js/sweetGUI.js \
+		web/js/enyo.js \
+		web/js/main.js \
+		web/js/offline.min.js \
 		web/js/store.min.js \
 		web/js/init.js \
-		web/js/jquery.min.js \
-		web/js/offline.min.js \
+		web/js/app.js \
+		web/js/bootstrap-switch.min.js \
 		web/js/bootstrap.min.js \
 		web/js/enyostuff.js \
 		web/js/sweetApps.js \
-		web/js/bootstrap-switch.min.js \
-		web/js/app.js \
-		web/js/enyo.js \
-		web/js/modernizr-2.6.2-respond-1.1.0.min.js
+		web/js/modernizr-2.6.2-respond-1.1.0.min.js \
+		web/css/enyo.css \
+		web/css/font-awesome.css \
+		web/css/animate.min.css \
+		web/css/main.css \
+		web/css/font-awesome.min.css \
+		web/css/bootstrap-switch.css \
+		web/css/bootstrap.min.css \
+		web/css/bootstrap-responsive.min.css \
+		web/img/derek.jpeg \
+		web/img/bg01.png \
+		web/img/glyphicons-halflings-white.png \
+		web/img/glyphicons-halflings.png
 	/home/derek/Qt/5.2.0/gcc_64/bin/rcc -name serp serp.qrc -o qrc_serp.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_webinterfacer.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_webinterfacer.cpp
 moc_mainwindow.cpp: ../../Qt/5.2.0/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.2.0/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../Qt/5.2.0/gcc_64/include/QtWidgets/qwidget.h \
@@ -606,6 +610,66 @@ moc_mainwindow.cpp: ../../Qt/5.2.0/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.2.0/gcc_64/include/QtGui/qicon.h \
 		mainwindow.h
 	/home/derek/Qt/5.2.0/gcc_64/bin/moc $(DEFINES) $(INCPATH) mainwindow.h -o moc_mainwindow.cpp
+
+moc_webinterfacer.cpp: ../../Qt/5.2.0/gcc_64/include/QtCore/QObject \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qfeatures.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_integrity.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qoldbasicatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_vxworks.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_power.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_alpha.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_bfin.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_mips.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_s390.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_sh4a.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_sparc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_x86.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_unix.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qtypetraits.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qisenum.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobject_impl.h \
+		webinterfacer.h
+	/home/derek/Qt/5.2.0/gcc_64/bin/moc $(DEFINES) $(INCPATH) webinterfacer.h -o moc_webinterfacer.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -859,14 +923,149 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../Qt/5.2.0/gcc_64/include/QtGui/qtouchdevice.h \
 		../../Qt/5.2.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.2.0/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		webinterfacer.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/QObject \
+		../../Qt/5.2.0/gcc_64/include/QtWebKitWidgets/QWebFrame \
+		../../Qt/5.2.0/gcc_64/include/QtWebKitWidgets/qwebframe.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/QSslConfiguration \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qsslconfiguration.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qsslsocket.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qsslerror.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qsslcertificate.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcryptographichash.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.2.0/gcc_64/include/QtNetwork/qssl.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/QFlags \
+		../../Qt/5.2.0/gcc_64/include/QtWebKit/qwebkitglobal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
+
+webinterfacer.o: webinterfacer.cpp webinterfacer.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/QObject \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qfeatures.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_integrity.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qoldbasicatomic.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_vxworks.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_power.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_alpha.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_bfin.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_mips.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_s390.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_sh4a.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_sparc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_x86.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qatomic_unix.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qtypetraits.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qisenum.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.2.0/gcc_64/include/QtWidgets/QMainWindow \
+		../../Qt/5.2.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../Qt/5.2.0/gcc_64/include/QtWidgets/qwidget.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qwindowdefs.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmargins.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qrect.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsize.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qpaintdevice.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qpalette.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qcolor.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qrgb.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qdatastream.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qbrush.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qmatrix.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qpolygon.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qregion.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qline.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qtransform.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qpainterpath.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qimage.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qpixmap.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qfont.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qfontinfo.h \
+		../../Qt/5.2.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qcursor.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qkeysequence.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qevent.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qurl.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qurlquery.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.2.0/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qvector2d.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../../Qt/5.2.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.2.0/gcc_64/include/QtGui/qicon.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o webinterfacer.o webinterfacer.cpp
 
 qrc_serp.o: qrc_serp.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_serp.o qrc_serp.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_webinterfacer.o: moc_webinterfacer.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_webinterfacer.o moc_webinterfacer.cpp
 
 ####### Install
 

@@ -1,7 +1,5 @@
 //these are the core addons for sweetERP, but this should be extended to load 
 //addOns dynamically
-
-//these addons should come from c++ ?
 var coreAddOns = [
 
 ];
