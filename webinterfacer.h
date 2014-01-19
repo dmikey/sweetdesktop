@@ -13,14 +13,16 @@ Q_OBJECT
 public:
     QMainWindow* mainWindow;
     Ui::MainWindow* ui;
-    void setMainWindow(QMainWindow);
-    explicit webInterfacer(QMainWindow* MainWindow = 0, Ui::MainWindow* ui = 0);
+    explicit webInterfacer(QMainWindow* MainWindow = 0, Ui::MainWindow* UI = 0);
 
 private:
 
 
 public slots:
     void setTitle(QString);
+    void setDebug(bool);
+
+private slots:
     void handleWebviewLoad();
 
 signals:
