@@ -9,6 +9,12 @@ enyo.kind({
     name: "initialize",
     kind: enyo.Component,
     init: function () {
+        //set Title of the Window
+        qtInterface.setTitle("This Is a Window Title");
+
+        //turn on the webkit debugger
+        qtInterface.setDebug(true);
+
         //check if local storage is enabled
         if (!store.enabled) {
             console.log('Local storage is not supported by your browser. Please disabled "Private Mode", or upgrade to a modern browser')

@@ -38,6 +38,9 @@
     </property>
     <item>
      <widget class="QWebView" name="webView">
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
       <property name="url">
        <url>
         <string>qrc:/web/index.html</string>

@@ -22,9 +22,6 @@ public slots:
     void setTitle(QString);
     void setDebug(bool);
 
-private slots:
-    void handleWebviewLoad();
-
 signals:
 
 

@@ -18,6 +18,9 @@ public:
 public slots:
 
 
+private slots:
+    void handleWebviewLoad();
+
 private:
     Ui::MainWindow *ui;
 };
