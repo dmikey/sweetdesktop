@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "webinterfacer.h"
+
 #include <QWebFrame>
 
 webInterfacer* webInterface;
@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //connect webInterfacer to the webframe
     ui->webView->page()->currentFrame()->addToJavaScriptWindowObject(QString("qtInterface"), webInterface);
+
     //connect load finished, so incase the page is refreshed by accident
     connect(ui->webView, SIGNAL(loadFinished(bool)), this, SLOT(handleWebviewLoad()));
 
