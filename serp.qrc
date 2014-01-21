@@ -19,7 +19,6 @@
         <file alias="sweetGUI.js">web/js/sweetGUI.js</file>
     </qresource>
     <qresource prefix="/web/css">
-        <file alias="animate.min.css">web/css/animate.min.css</file>
         <file alias="bootstrap-responsive.min.css">web/css/bootstrap-responsive.min.css</file>
         <file alias="bootstrap-switch.css">web/css/bootstrap-switch.css</file>
         <file alias="bootstrap.min.css">web/css/bootstrap.min.css</file>
