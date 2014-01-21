@@ -1,8 +1,8 @@
-//these are the core addons for sweetERP, but this should be extended to load 
-//addOns dynamically
+//add your application modules to be loaded
 var coreAddOns = [
 
 ];
+
 
 //initalize app
 enyo.kind({
@@ -10,7 +10,7 @@ enyo.kind({
     kind: enyo.Component,
     init: function () {
         //set Title of the Window
-        qtInterface.setTitle("This Is a Window Title");
+        qtInterface.setTitle("Sample Application");
 
         //turn on the webkit debugger
         qtInterface.setDebug(true);
